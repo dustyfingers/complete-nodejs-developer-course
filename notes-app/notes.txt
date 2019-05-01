@@ -1,0 +1,2 @@
+This file was created with Node.js!
+This file was added into the file with Node.js as well!
