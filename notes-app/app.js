@@ -1,5 +1,10 @@
-const fs = require('fs');
+const add = require('./utils.js');
+const getNotes = require('./notes.js');
 
-fs.writeFileSync('notes.txt', 'This file was created with Node.js!\n');
 
-fs.appendFileSync('notes.txt', 'This file was added into the file with Node.js as well!');
+const sum = add(4, -2);
+console.log(sum);
+
+
+const message = getNotes();
+console.log(message);
