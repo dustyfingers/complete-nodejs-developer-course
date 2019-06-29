@@ -1,11 +1,11 @@
 const chalk = require('chalk'),
-      yargs = require('yargs'),
-      fs = require('fs'),
-      validator = require('validator'),
-      getNotes = require('./notes.js');
+  yargs = require('yargs'),
+  fs = require('fs'),
+  validator = require('validator'),
+  note = require('./notes.js');
 
 // customize yargs version
-yargs.version('1.1.0') ;
+yargs.version('1.1.0');
 
 // add command
 yargs.command({
@@ -24,8 +24,7 @@ yargs.command({
     }
   },
   handler: (argv) => {
-    console.log('Title: ' + argv.title);
-    console.log('Body: \n' + argv.body);
+    note.addNote(argv.title, argv.body);
   }
 });
 
