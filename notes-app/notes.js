@@ -17,6 +17,11 @@ const addNote = function (title, body) {
   }
 }
 
+const removeNote = function (title) {
+  const note = loadNotes().filter(note => note.title === title);
+
+}
+
 const saveNotes = function (notes) {
   const dataJSON = JSON.stringify(notes);
   fs.writeFileSync('notes.json', dataJSON);
