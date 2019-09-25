@@ -1,5 +1,3 @@
-const fs = require('fs')
+const add = require('./utils.js');
 
-// fs.writeFileSync('notes.txt', 'This file was overwritten by Nodejs!')
-
-fs.appendFileSync('notes.txt', '\nThis file was appended by Nodejs!')
+console.log(add(5,7));
