@@ -1,5 +1,5 @@
 const yargs = require("yargs");
-const notesHelpers = require("./notes.js");
+const notesHelpers = require("./notes");
 
 
 // set custom version
@@ -13,17 +13,17 @@ yargs.command({
     describe: "Adds a new note",
     builder: {
         title: {
-        describe: "Note title",
-        demandOption: true,
-        type: "string"
+            describe: "Note title",
+            demandOption: true,
+            type: "string"
         },
         body: {
-        describe: "Note body",
-        demandOption: true,
-        type: "string"
+            describe: "Note body",
+            demandOption: true,
+            type: "string"
         }
     },
-    handler: function(argv) {
+    handler: argv => {
         notesHelpers.addNote(argv.title, argv.body);
     }
 });
@@ -32,8 +32,15 @@ yargs.command({
 yargs.command({
     command: "remove",
     describe: "Removes a note",
-    handler: function() {
-        console.log("removing a note...");
+    builder: {
+        title: {
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: argv => {
+        notesHelpers.removeNote(argv.title);
     }
 });
 
@@ -41,17 +48,17 @@ yargs.command({
 yargs.command({
     command: "read",
     describe: "Reads a single note",
-    handler: function() {
-        console.log("reading a single note.");
+    handler: argv => {
+        notesHelpers.readNote(argv.title);
     }
 })
 
-// read multiple command
+// read all command
 yargs.command({
     command: "list",
     describe: "Lists all notes",
-    handler: function() {
-        console.log("listing out all of the notes!");
+    handler: () => {
+        notesHelpers.listNotes();
     }
 });
 
