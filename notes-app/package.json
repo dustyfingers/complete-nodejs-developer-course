@@ -4,14 +4,24 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+<<<<<<< HEAD
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
+=======
+    "test": "echo \"Error: no test specified\" && exit 1"
+>>>>>>> f5f23aa2e8d242b5d42994fb72335dcbfdc27d0b
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "chalk": "^2.4.1",
     "validator": "^10.8.0",
     "yargs": "^12.0.2"
+=======
+    "chalk": "^2.4.2",
+    "validator": "^10.11.0",
+    "yargs": "^13.2.2"
+>>>>>>> f5f23aa2e8d242b5d42994fb72335dcbfdc27d0b
   }
 }

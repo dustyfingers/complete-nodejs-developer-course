@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const request = require("postman-request");
 
 const weatherstackUrl = "http://api.weatherstack.com/current?access_key=e0189954bb9cf553030f50eb483a321e&query=Colorado Springs&units=f";
@@ -19,3 +20,19 @@ request({ url: mapboxUrl, json: true }, (err, res) => {
     // long
     console.log(res.body.features[0].center[0]);
 });
+=======
+const request = require('request');
+const url = 'https://api.darksky.net/forecast/0476687bab36c26bad5401f69e6879bc/37.8267,-122.4233';
+
+request({ url: url, json: true }, (error, response) => {
+    let currentTemp, currentPrecipProb, dailyHigh, dailyLow;
+    currentTemp = response.body.currently.temperature;
+    currentPrecipProb = response.body.currently.precipProbability;
+    dailyHigh = response.body.daily.data[0].temperatureMax;
+    dailyLow = response.body.daily.data[0].temperatureMin;
+    console.log(`It is currently ${currentTemp} degrees F out in Los Angeles, CA. There is a ${currentPrecipProb}% chance of rain.\n`);
+    console.log(`The high for today is ${dailyHigh} and the low is ${dailyLow}.\n`);
+});
+
+
+>>>>>>> f5f23aa2e8d242b5d42994fb72335dcbfdc27d0b

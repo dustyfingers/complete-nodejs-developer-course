@@ -10,6 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "postman-request": "^2.88.1-postman.29"
+=======
+    "request": "^2.88.0"
+>>>>>>> f5f23aa2e8d242b5d42994fb72335dcbfdc27d0b
   }
 }
