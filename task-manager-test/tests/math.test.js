@@ -10,8 +10,6 @@ test('should calculate total with default tip', () => {
     expect(total).toBe(12);
 });
 
-test();
-
 // * Why test??
 // - Saves time
 // - Creates reliable software
