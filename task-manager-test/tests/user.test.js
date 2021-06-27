@@ -21,18 +21,42 @@ beforeEach(async () => {
 })
 
 test('should sign up a new user', async () => {
-    await request(app).post('/users').send({
+    const response = await request(app).post('/users').send({
         name: "Andrew",
         email: "andrew123@example.com",
         password: "mypass777!@"
     }).expect(201)
+
+    // assert that db was changed correctly
+    const user = await User.findById(response.body.user._id)
+    expect(user).not.toBeNull()
+
+    // assert the response is in the correct format
+    
+    // good for checking singular obj values, not so much for more complex cases
+    // expect(response.body.user.name).toBe('Andrew')
+
+    // better for more complex cases
+    expect(response.body).toMatchObject({
+        user: {
+            name: 'Andrew',
+            email: 'andrew123@example.com'
+        },
+        token: user.tokens[0].token
+    })
+
+    // assert that plaintext password is not stored in the database
+    expect(user.password).not.toBe('mypass777!@');
 })
 
 test('should log in existing user', async () => {
-    await request(app).post('/users/login').send({
+    const response = await request(app).post('/users/login').send({
         email: userOne.email,
         password: userOne.password
     }).expect(200)
+
+    const user = await User.findById(userOneId)
+    expect(response.body.token).toBe(user.tokens[1].token)
 })
 
 test('should not log in notexistent user', async () => {
@@ -69,12 +93,15 @@ test('should delete account for user', async () => {
     .delete('/users/me')
     .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
     .send()
-    .expect(200);
+    .expect(200)
+
+    const user = await User.findById(userOneId)
+    expect(user).toBeNull()
 })
 
 test('should not delete account for unauthorized user', async () => {
     await request(app)
     .delete('/users/me')
     .send()
-    .expect(401);
+    .expect(401)
 })
