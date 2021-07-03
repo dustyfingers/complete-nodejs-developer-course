@@ -1,24 +1,10 @@
 const request = require('supertest')
-const jwt = require('jsonwebtoken')
-const mongoose = require('mongoose')
+
 const app = require('../src/app')
 const User = require('../src/models/user')
+const { userOneId, userOne, populateDatabase } = require('./fixtures/db')
 
-const userOneId = new mongoose.Types.ObjectId();
-const userOne = {
-    _id: userOneId,
-    name: 'Mike',
-    email: 'mike@example.com',
-    password: '56what!!',
-    tokens: [{
-        token: jwt.sign({ _id: userOneId }, process.env.JWT_SECRET)
-    }]
-}
-
-beforeEach(async () => {
-    await User.deleteMany()
-    await new User(userOne).save()
-})
+beforeEach(populateDatabase)
 
 test('should sign up a new user', async () => {
     const response = await request(app).post('/users').send({
@@ -140,5 +126,5 @@ test('should not update invalid user fields', async () => {
         .expect(400)
 
     const user = await User.findById(userOneId)
-    expect(user.name).toEqual('Mike')  
+    expect(user.name).toEqual(userOne.name)  
 })
